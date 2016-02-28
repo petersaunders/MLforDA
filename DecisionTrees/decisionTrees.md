@@ -5,7 +5,7 @@
 - Insert Picture Here -
 
 ## SAS Code
-'''sas
+```sas
 LIBNAME mydata "/courses/d1406ae5ba27fe300 " access=readonly;
 
 /* Import the diabetes data from csv file */
@@ -26,7 +26,7 @@ proc hpsplit data=diabetes_data seed=1234;
     criterion entropy;
     prune cc;    
 RUN;
-'''
+```
 
 ## Background
 I acquired data on diabetes in Pima Indians from the University of California, Irvine Machine Learning Data repository.
