@@ -2,7 +2,7 @@
 
 ## Final Decision Tree
 
-![Diabetes Decision Tree](/images/tree.png?raw=true)
+![Diabetes Decision Tree](images/tree.png?raw=true)
 
 ## SAS Code
 ```sas
