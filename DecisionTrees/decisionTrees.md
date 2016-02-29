@@ -57,6 +57,8 @@ The cost-complexity graph shows how this tree was selected from those with more 
 
 ![Cost-Complexity Analysis](images/pruning.png?raw=true)
 
+I tested different random number seeds and different optimisation criteria (entropy, gini etc.) and found that this tree was fairly robust.
+
 ## Results
 
 The first split is on blood glucose level, whether the individual has a blood glucose level above or below 127.  If the blood glucose level is below 127 they are classified as not having diabetes.  This prediction is correct for 85% of the training instances.
@@ -65,7 +67,8 @@ If the individual has blood glucose level above 127 then a further split is done
 
 If their glucose level is below 165.3 then further split is done on the `age` variable at a threshold of 23.4.  If the individual is below 23.4 they are predicted not to have diabetes, and otherwise predicted to have diabetes.  The negative prediction is correct in 95% of the training cases and the positive prediction 59%.
 
-The overall error rates are summarised in the confusion matrix:
+The error rates are summarised in the confusion matrix:
 
 ![Confusion Matrix](images/confusion.png?raw=true)
 
+The overall error rate was 19.9%, sensitivity was 0.84 and specificity 0.72.
