@@ -45,7 +45,7 @@
 <span class="pl-c">/* Filter to remove missing (0) data */</span>
 <span class="pl-k">DATA</span> <span class="pl-en">diabetes_data</span>;
     <span class="pl-c1">SET</span> <span class="pl-en">imported_data</span>;
-    <span class="pl-k">IF</span> bp&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> triceps&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> bmi&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> insulin&gt;<span class="pl-c1">0</span>;
+    <span class="pl-k">IF</span> bp&gt;<span class="pl-c1">0</span> glucose&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span <span class="pl-k">AND</span> triceps&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> bmi&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> insulin&gt;<span class="pl-c1">0</span>;
 
 <span class="pl-c">/* Build the decision tree */</span>
 <span class="pl-c1"><span class="pl-c1">ods</span></span> graphics <span class="pl-c1"><span class="pl-c1">on</span></span>;
