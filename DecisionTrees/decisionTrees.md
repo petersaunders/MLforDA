@@ -53,6 +53,10 @@ I used the SAS `hpsplit` procedure to produce a decision tree for the response v
 
 Using cost-complexity pruning produced a tree with 4 leaves which uses just the covariates `glucose` and `age`.
 
+The cost-complexity graph shows how this tree was selected from those with more leaves:
+
+![Cost-Complexity Analysis](images/pruning.png?raw=true)
+
 ## Results
 
 The first split is on blood glucose level, whether the individual has a blood glucose level above or below 127.  If the blood glucose level is below 127 they are classified as not having diabetes.  This prediction is correct for 85% of the training instances.
@@ -61,10 +65,7 @@ If the individual has blood glucose level above 127 then a further split is done
 
 If their glucose level is below 165.3 then further split is done on the `age` variable at a threshold of 23.4.  If the individual is below 23.4 they are predicted not to have diabetes, and otherwise predicted to have diabetes.  The negative prediction is correct in 95% of the training cases and the positive prediction 59%.
 
-These results are summarised in the confusion matrix:
+The overall error rates are summarised in the confusion matrix:
 
-|        |   | Predicted |            ||
-| ------ |---|-----|-----|------------|
-|        |   | **0**  | **1**  | **Error Rate** |
-| **Actual** | **0** | 221 | 41  | 16%        |
-|            | **1** | 37  | 93  | 28%        |
+![Confusion Matrix](images/confusion.png?raw=true)
+
