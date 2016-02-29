@@ -1,8 +1,8 @@
-# Decision Trees
+# Week 1 - Decision Trees
 
-## Final Tree
+## Final Decision Tree
 
-- Insert Picture Here -
+![Diabetes Decision Tree](/images/tree.png)
 
 ## SAS Code
 ```sas
@@ -29,7 +29,7 @@ RUN;
 ```
 
 ## Background
-I acquired data on diabetes in Pima Indians from the University of California, Irvine Machine Learning Data repository.
+I acquired data on diabetes in Pima Indians from the [University of California, Irvine Machine Learning Data repository](https://archive.ics.uci.edu/ml/datasets/Pima+Indians+Diabetes).
 
 The dataset consists of 768 instances with 9 variates, including the class variable 'diabetes'.  These variates are:
 
