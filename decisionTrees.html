@@ -1,1 +1,160 @@
-blah blah blah
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Machine Learning for Data Analysis : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Machine Learning for Data Analysis</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/petersaunders/MLforDA">View on GitHub</a>
+
+          <h1 id="project_title">Machine Learning for Data Analysis</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/petersaunders/MLforDA/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/petersaunders/MLforDA/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a id="assignments" class="anchor" href="#assignments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Assignments</h3>
+
+<div id="readme" class="readme blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-week-1---decision-trees" class="anchor" href="#week-1---decision-trees" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Week 1 - Decision Trees</h1>
+
+<h2><a id="user-content-final-decision-tree" class="anchor" href="#final-decision-tree" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Final Decision Tree</h2>
+
+<p><a href="/petersaunders/MLforDA/blob/master/DecisionTrees/images/tree.png?raw=true" target="_blank"><img src="/petersaunders/MLforDA/raw/master/DecisionTrees/images/tree.png?raw=true" alt="Diabetes Decision Tree" style="max-width:100%;"></a></p>
+
+<h2><a id="user-content-sas-code" class="anchor" href="#sas-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>SAS Code</h2>
+
+<div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
+
+<span class="pl-c">/* Import the diabetes data from csv file */</span>
+<span class="pl-c1">PROC <span class="pl-c1">IMPORT</span></span> DATAFILE=<span class="pl-s">'/home/petersaunders10/decisionTrees/pima-indians-diabetes.csv'</span> 
+        <span class="pl-c1"><span class="pl-c1">OUT</span></span>=imported_data <span class="pl-c1"><span class="pl-c1">REPLACE</span></span>;
+
+<span class="pl-c">/* Filter to remove missing (0) data */</span>
+<span class="pl-k">DATA</span> <span class="pl-en">diabetes_data</span>;
+    <span class="pl-c1">SET</span> <span class="pl-en">imported_data</span>;
+    <span class="pl-k">IF</span> bp&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> triceps&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> bmi&gt;<span class="pl-c1">0</span> <span class="pl-k">AND</span> insulin&gt;<span class="pl-c1">0</span>;
+
+<span class="pl-c">/* Build the decision tree */</span>
+<span class="pl-c1"><span class="pl-c1">ods</span></span> graphics <span class="pl-c1"><span class="pl-c1">on</span></span>;
+
+<span class="pl-c1">proc <span class="pl-c1">hpsplit</span></span> data=diabetes_data seed=<span class="pl-c1">1234</span>;
+    <span class="pl-c1"><span class="pl-c1">class</span></span> diabetes;
+    <span class="pl-c1"><span class="pl-c1">model</span></span> diabetes = pregnant glucose bp triceps insulin bmi pedigree age;
+    criterion entropy;
+    prune cc;    
+<span class="pl-k">RUN</span>;</pre></div>
+
+<h2><a id="user-content-background" class="anchor" href="#background" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Background</h2>
+
+<p>I acquired data on diabetes in Pima Indians from the <a href="https://archive.ics.uci.edu/ml/datasets/Pima+Indians+Diabetes">University of California, Irvine Machine Learning Data repository</a>.</p>
+
+<p>The dataset consists of 768 instances with 9 variates, including the class variable 'diabetes'.  These variates are:</p>
+
+<table><thead>
+<tr>
+<th>Variate</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pregnant</td>
+<td>Number of times pregnant</td>
+</tr>
+<tr>
+<td>glucose</td>
+<td>Plasma glucose concentration a 2 hours in an oral glucose tolerance test</td>
+</tr>
+<tr>
+<td>bp</td>
+<td>Diastolic blood pressure (mm Hg)</td>
+</tr>
+<tr>
+<td>triceps</td>
+<td>Triceps skin fold thickness (mm)</td>
+</tr>
+<tr>
+<td>insulin</td>
+<td>2-Hour serum insulin (mu U/ml)</td>
+</tr>
+<tr>
+<td>bmi</td>
+<td>Body mass index (weight in kg/(height in m)^2)</td>
+</tr>
+<tr>
+<td>pedigree</td>
+<td>Diabetes pedigree function</td>
+</tr>
+<tr>
+<td>age</td>
+<td>Age (years)</td>
+</tr>
+<tr>
+<td>diabetes</td>
+<td>Class variable (0 or 1)</td>
+</tr>
+</tbody></table>
+
+<p>The data contains some missing values, entered as 0, which are clearly not biologically possible (e.g. blood pressure, insulin, bmi).  These will need to be removed from the analysis.</p>
+
+<h2><a id="user-content-analysis" class="anchor" href="#analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Analysis</h2>
+
+<p>I used the SAS <code>hpsplit</code> procedure to produce a decision tree for the response variable <code>diabetes</code> using the other 8 pieces of data as continuous variables.  After filtering out the invalid data I was left with 392 instances on which to build the model.</p>
+
+<p>Using cost-complexity pruning produced a tree with 4 leaves which uses just the covariates <code>glucose</code> and <code>age</code>.</p>
+
+<p>The cost-complexity graph shows how this tree was selected from those with more leaves:</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/DecisionTrees/images/pruning.png?raw=true" target="_blank"><img src="/petersaunders/MLforDA/raw/master/DecisionTrees/images/pruning.png?raw=true" alt="Cost-Complexity Analysis" style="max-width:100%;"></a></p>
+
+<p>I tested different random number seeds and different optimisation criteria (entropy, gini etc.) and found that this tree was fairly robust.</p>
+
+<h2><a id="user-content-results" class="anchor" href="#results" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Results</h2>
+
+<p>The first split is on blood glucose level, whether the individual has a blood glucose level above or below 127.  If the blood glucose level is below 127 they are classified as not having diabetes.  This prediction is correct for 85% of the training instances.</p>
+
+<p>If the individual has blood glucose level above 127 then a further split is done on blood glucose level at a threshold of 165.3.  If their glucose level is above 165.3 then they are classified as having diabetes.  This prediction is correct for 89% of the training cases.</p>
+
+<p>If their glucose level is below 165.3 then further split is done on the <code>age</code> variable at a threshold of 23.4.  If the individual is below 23.4 they are predicted not to have diabetes, and otherwise predicted to have diabetes.  The negative prediction is correct in 95% of the training cases and the positive prediction 59%.</p>
+
+<p>The error rates are summarised in the confusion matrix:</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/DecisionTrees/images/confusion.png?raw=true" target="_blank"><img src="/petersaunders/MLforDA/raw/master/DecisionTrees/images/confusion.png?raw=true" alt="Confusion Matrix" style="max-width:100%;"></a></p>
+
+<p>The overall error rate was 19.9%, sensitivity was 0.84 and specificity 0.72.</p>
+</article>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Machine Learning for Data Analysis maintained by <a href="https://github.com/petersaunders">petersaunders</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
