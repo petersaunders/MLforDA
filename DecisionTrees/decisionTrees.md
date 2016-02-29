@@ -49,4 +49,10 @@ The data contains some missing values, entered as 0, which are clearly not biolo
 
 ## Analysis
 
+I used the SAS `hpsplit` procedure to produce a decision tree for the response variable `diabetes` using the other 8 covariates.  After filtering out the invalid data I was left with 392 instances.
+
+Using cost-complexity pruning produced a tree with 4 leaves which uses just the covariates `glucose` and `age`.
+
+The first split is on blood glucose level, whether the individual has a blood glucose level above or below 127.  If the blood glucose level is below 127 they are...
+
 ## Results
