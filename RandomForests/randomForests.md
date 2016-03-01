@@ -69,6 +69,12 @@ The fit statistics, for increasing forest size are shown below:
 ![Fitting Stats 1-10](images/fitstats1.png)
 ![Fitting Stats 20-100](images/fitstats2.png)
 
-The variable importance table was:
+We can see that the estimates for the out-of-sample (or out-of-bag) error rate for small forests (1-5 trees) is already very small, only 0.15 - 0.2%  As the forest size is increased this decreases towards 0.1%.
 
+This suggests that the random forest method is actually unnecessary for this problem.  A single decision tree would do almost as well and would be much easier to interpret.  However, using the random forest method has produced a very accurate model.
+
+The variable importance table was:
+![Variable Importance Table](images/importance.png)
+
+The `odor` variable is by far the most important in predicting whether a mushroom is edible or poisonous.  Looking at a simple decision tree...
 
