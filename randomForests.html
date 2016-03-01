@@ -28,214 +28,214 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-<article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-week-2---random-forests" class="anchor" href="#week-2---random-forests" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Week 2 - Random Forests</h1>
-
-<h2><a id="user-content-sas-code" class="anchor" href="#sas-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>SAS Code</h2>
-
-<div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
-
-<span class="pl-c">/* Import the data from csv file */</span>
-<span class="pl-c1">PROC <span class="pl-c1">IMPORT</span></span> DATAFILE=<span class="pl-s">'/home/petersaunders10/randomForests/mushrooms.csv'</span> 
-        <span class="pl-c1"><span class="pl-c1">OUT</span></span>=mushroom_data <span class="pl-c1"><span class="pl-c1">REPLACE</span></span>;
-
-<span class="pl-c">/* Build random forest for mushrooms WITHOUT stalk_root */</span>        
-<span class="pl-c1">PROC <span class="pl-c1">HPFOREST</span></span> DATA=mushroom_data SEED=<span class="pl-c1">14723</span>;
-    TARGET edible <span class="pl-k">/</span>LEVEL=BINARY;
-    <span class="pl-c1"><span class="pl-c1">INPUT</span></span> cap_shape cap_surface cap_color 
-        bruises odor gill_attachment gill_spacing 
-        gill_size gill_color stalk_shape 
-        stalk_surface_above_ring stalk_surface_below_ring 
-        stalk_color_above_ring stalk_color_below_ring 
-        veil_type veil_color ring_number ring_type 
-        spore_print_color population habitat <span class="pl-k">/</span>LEVEL=NOMINAL;
-
-<span class="pl-k">RUN</span>;</pre></div>
-
-<h2><a id="user-content-background" class="anchor" href="#background" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Background</h2>
-
-<p>I acquired data on the edibility of mushrooms from the <a href="https://archive.ics.uci.edu/ml/datasets/Mushroom">University of California, Irvine Machine Learning Data repository</a>.</p>
-
-<p>The dataset consists of 8124 instances with 23 variables, including the class variable of edible/poisonous.  This represents 8124 hypothetical instances of 23 different species of mushroom (not classified here).  </p>
-
-<p>There is no simple rule for determining the edibility of a mushroom so I want to build a random forest model which, given all the information about a particular mushroom, will predict (hopefully with a high degree of accuracy!) whether it is edible or not.</p>
-
-<p>The variables are:</p>
-
-<table><thead>
-<tr>
-<th>Variate</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>edible</td>
-<td>edible=e, poisonous/unknown=p</td>
-</tr>
-<tr>
-<td>cap_shape</td>
-<td>bell=b,conical=c,convex=x,flat=f,knobbed=k,sunken=s</td>
-</tr>
-<tr>
-<td>cap_surface</td>
-<td>fibrous=f,grooves=g,scaly=y,smooth=s</td>
-</tr>
-<tr>
-<td>cap_color</td>
-<td>brown=n,buff=b,cinnamon=c,gray=g,green=r, pink=p,purple=u,red=e,white=w,yellow=y</td>
-</tr>
-<tr>
-<td>bruises</td>
-<td>bruises=t,no=f</td>
-</tr>
-<tr>
-<td>odor</td>
-<td>almond=a,anise=l,creosote=c,fishy=y,foul=f, musty=m,none=n,pungent=p,spicy=s</td>
-</tr>
-<tr>
-<td>gill_attachment</td>
-<td>attached=a,descending=d,free=f,notched=n</td>
-</tr>
-<tr>
-<td>gill_spacing</td>
-<td>close=c,crowded=w,distant=d</td>
-</tr>
-<tr>
-<td>gill_size</td>
-<td>broad=b,narrow=n</td>
-</tr>
-<tr>
-<td>gill_color</td>
-<td>black=k,brown=n,buff=b,chocolate=h,gray=g,green=r, orange=o,pink=p,purple=u,red=e,white=w,yellow=y</td>
-</tr>
-<tr>
-<td>stalk_shape</td>
-<td>enlarging=e,tapering=t</td>
-</tr>
-<tr>
-<td>stalk_root</td>
-<td>bulbous=b,club=c,cup=u,equal=e,rhizomorphs=z,rooted=r,missing=?</td>
-</tr>
-<tr>
-<td>stalk_surface_above_ring</td>
-<td>fibrous=f,scaly=y,silky=k,smooth=s</td>
-</tr>
-<tr>
-<td>stalk_surface_below_ring</td>
-<td>fibrous=f,scaly=y,silky=k,smooth=s</td>
-</tr>
-<tr>
-<td>stalk_color_above_ring</td>
-<td>brown=n,buff=b,cinnamon=c,gray=g,orange=o, pink=p,red=e,white=w,yellow=y</td>
-</tr>
-<tr>
-<td>stalk_color_below_ring</td>
-<td>brown=n,buff=b,cinnamon=c,gray=g,orange=o, pink=p,red=e,white=w,yellow=y</td>
-</tr>
-<tr>
-<td>veil_type</td>
-<td>partial=p,universal=u</td>
-</tr>
-<tr>
-<td>veil_color</td>
-<td>brown=n,orange=o,white=w,yellow=y</td>
-</tr>
-<tr>
-<td>ring_number</td>
-<td>none=n,one=o,two=t</td>
-</tr>
-<tr>
-<td>ring_type</td>
-<td>cobwebby=c,evanescent=e,flaring=f,large=l, none=n,pendant=p,sheathing=s,zone=z</td>
-</tr>
-<tr>
-<td>spore_print_color</td>
-<td>black=k,brown=n,buff=b,chocolate=h,green=r, orange=o,purple=u,white=w,yellow=y</td>
-</tr>
-<tr>
-<td>population</td>
-<td>abundant=a,clustered=c,numerous=n, scattered=s,several=v,solitary=y</td>
-</tr>
-<tr>
-<td>habitat</td>
-<td>grasses=g,leaves=l,meadows=m, paths=p,urban=u,waste=w,woods=d</td>
-</tr>
-</tbody></table>
-
-<p>The <code>stalk_root</code> column contains many missing data, coded using <code>?</code>, and this will need to be considered when doing the analysis.</p>
-
-<h2><a id="user-content-analysis" class="anchor" href="#analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Analysis</h2>
-
-<p>I used the SAS <code>HPFOREST</code> procedure to build a random forest using all of the variables <em>except for</em> <code>stalk_root</code>.</p>
-
-<p>I used the default parameters for <code>Variables to Try</code>, <code>Maximum Trees</code> etc.</p>
-
-<h2><a id="user-content-results" class="anchor" href="#results" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Results</h2>
-
-<p>The fit statistics, for increasing forest size are shown below:</p>
-
-<p><a href="/petersaunders/MLforDA/blob/master/RandomForests/images/fitstats1.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/RandomForests/images/fitstats1.png" alt="Fitting Stats 1-10" style="max-width:100%;"></a>
-<a href="/petersaunders/MLforDA/blob/master/RandomForests/images/fitstats2.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/RandomForests/images/fitstats2.png" alt="Fitting Stats 20-100" style="max-width:100%;"></a></p>
-
-<p>We can see that the estimates for the out-of-sample (or out-of-bag) error rate for small forests (1-5 trees) is already very small, only 0.15 - 0.2%  As the forest size is increased this decreases towards 0.1%.</p>
-
-<p>This suggests that the random forest method is actually unnecessary for this problem.  A single decision tree would do almost as well and would be much easier to interpret.  However, using the random forest method has produced a very accurate model.</p>
-
-<p>The variable importance table was:</p>
-
-<p><a href="/petersaunders/MLforDA/blob/master/RandomForests/images/importance.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/RandomForests/images/importance.png" alt="Variable Importance Table" style="max-width:100%;"></a></p>
-
-<p>The <code>odor</code> variable is by far the most important in predicting whether a mushroom is edible or poisonous.  Looking at a simple decision tree analysis shows that the poisonous mushrooms had the odors c,f,m,p,s and y whereas the odors a, l and n were associated with either edible or poisonous mushrooms.</p>
-
-<table><thead>
-<tr>
-<th>odor</th>
-<th>edible</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>c = creosote</td>
-<td>No</td>
-</tr>
-<tr>
-<td>f = foul</td>
-<td>No</td>
-</tr>
-<tr>
-<td>m = musty</td>
-<td>No</td>
-</tr>
-<tr>
-<td>p = pungent</td>
-<td>No</td>
-</tr>
-<tr>
-<td>s = spicy</td>
-<td>No</td>
-</tr>
-<tr>
-<td>y = fishy</td>
-<td>No</td>
-</tr>
-<tr>
-<td>a = almondy</td>
-<td>Maybe</td>
-</tr>
-<tr>
-<td>l = anise</td>
-<td>Maybe</td>
-</tr>
-<tr>
-<td>n = none</td>
-<td>Maybe</td>
-</tr>
-</tbody></table>
-
-<p>So, if a mushroom smells foul, fishy or of creosote you shouldn't eat it, who would have guessed?!</p>
-
-<p>The next most important variable was <code>spore print color</code>, ahead of <code>ring type</code>. </p>
-
-<p>Simple, easily identifiable properties like <code>cap color</code> and <code>cap shape</code> are shown not to be very important, which demonstrates why it is difficult for people to determine whether mushrooms are edible or poisonous without careful inspection.</p>
-</article>
+  <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-week-2---random-forests" class="anchor" href="#week-2---random-forests" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Week 2 - Random Forests</h1>
+  
+  <h2><a id="user-content-sas-code" class="anchor" href="#sas-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>SAS Code</h2>
+  
+  <div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
+  
+  <span class="pl-c">/* Import the data from csv file */</span>
+  <span class="pl-c1">PROC <span class="pl-c1">IMPORT</span></span> DATAFILE=<span class="pl-s">'/home/petersaunders10/randomForests/mushrooms.csv'</span> 
+          <span class="pl-c1"><span class="pl-c1">OUT</span></span>=mushroom_data <span class="pl-c1"><span class="pl-c1">REPLACE</span></span>;
+  
+  <span class="pl-c">/* Build random forest for mushrooms WITHOUT stalk_root */</span>        
+  <span class="pl-c1">PROC <span class="pl-c1">HPFOREST</span></span> DATA=mushroom_data SEED=<span class="pl-c1">14723</span>;
+      TARGET edible <span class="pl-k">/</span>LEVEL=BINARY;
+      <span class="pl-c1"><span class="pl-c1">INPUT</span></span> cap_shape cap_surface cap_color 
+          bruises odor gill_attachment gill_spacing 
+          gill_size gill_color stalk_shape 
+          stalk_surface_above_ring stalk_surface_below_ring 
+          stalk_color_above_ring stalk_color_below_ring 
+          veil_type veil_color ring_number ring_type 
+          spore_print_color population habitat <span class="pl-k">/</span>LEVEL=NOMINAL;
+  
+  <span class="pl-k">RUN</span>;</pre></div>
+  
+  <h2><a id="user-content-background" class="anchor" href="#background" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Background</h2>
+  
+  <p>I acquired data on the edibility of mushrooms from the <a href="https://archive.ics.uci.edu/ml/datasets/Mushroom">University of California, Irvine Machine Learning Data repository</a>.</p>
+  
+  <p>The dataset consists of 8124 instances with 23 variables, including the class variable of edible/poisonous.  This represents 8124 hypothetical instances of 23 different species of mushroom (not classified here).  </p>
+  
+  <p>There is no simple rule for determining the edibility of a mushroom so I want to build a random forest model which, given all the information about a particular mushroom, will predict (hopefully with a high degree of accuracy!) whether it is edible or not.</p>
+  
+  <p>The variables are:</p>
+  
+  <table><thead>
+  <tr>
+  <th>Variate</th>
+  <th>Description</th>
+  </tr>
+  </thead><tbody>
+  <tr>
+  <td>edible</td>
+  <td>edible=e, poisonous/unknown=p</td>
+  </tr>
+  <tr>
+  <td>cap_shape</td>
+  <td>bell=b,conical=c,convex=x,flat=f,knobbed=k,sunken=s</td>
+  </tr>
+  <tr>
+  <td>cap_surface</td>
+  <td>fibrous=f,grooves=g,scaly=y,smooth=s</td>
+  </tr>
+  <tr>
+  <td>cap_color</td>
+  <td>brown=n,buff=b,cinnamon=c,gray=g,green=r, pink=p,purple=u,red=e,white=w,yellow=y</td>
+  </tr>
+  <tr>
+  <td>bruises</td>
+  <td>bruises=t,no=f</td>
+  </tr>
+  <tr>
+  <td>odor</td>
+  <td>almond=a,anise=l,creosote=c,fishy=y,foul=f, musty=m,none=n,pungent=p,spicy=s</td>
+  </tr>
+  <tr>
+  <td>gill_attachment</td>
+  <td>attached=a,descending=d,free=f,notched=n</td>
+  </tr>
+  <tr>
+  <td>gill_spacing</td>
+  <td>close=c,crowded=w,distant=d</td>
+  </tr>
+  <tr>
+  <td>gill_size</td>
+  <td>broad=b,narrow=n</td>
+  </tr>
+  <tr>
+  <td>gill_color</td>
+  <td>black=k,brown=n,buff=b,chocolate=h,gray=g,green=r, orange=o,pink=p,purple=u,red=e,white=w,yellow=y</td>
+  </tr>
+  <tr>
+  <td>stalk_shape</td>
+  <td>enlarging=e,tapering=t</td>
+  </tr>
+  <tr>
+  <td>stalk_root</td>
+  <td>bulbous=b,club=c,cup=u,equal=e,rhizomorphs=z,rooted=r,missing=?</td>
+  </tr>
+  <tr>
+  <td>stalk_surface_above_ring</td>
+  <td>fibrous=f,scaly=y,silky=k,smooth=s</td>
+  </tr>
+  <tr>
+  <td>stalk_surface_below_ring</td>
+  <td>fibrous=f,scaly=y,silky=k,smooth=s</td>
+  </tr>
+  <tr>
+  <td>stalk_color_above_ring</td>
+  <td>brown=n,buff=b,cinnamon=c,gray=g,orange=o, pink=p,red=e,white=w,yellow=y</td>
+  </tr>
+  <tr>
+  <td>stalk_color_below_ring</td>
+  <td>brown=n,buff=b,cinnamon=c,gray=g,orange=o, pink=p,red=e,white=w,yellow=y</td>
+  </tr>
+  <tr>
+  <td>veil_type</td>
+  <td>partial=p,universal=u</td>
+  </tr>
+  <tr>
+  <td>veil_color</td>
+  <td>brown=n,orange=o,white=w,yellow=y</td>
+  </tr>
+  <tr>
+  <td>ring_number</td>
+  <td>none=n,one=o,two=t</td>
+  </tr>
+  <tr>
+  <td>ring_type</td>
+  <td>cobwebby=c,evanescent=e,flaring=f,large=l, none=n,pendant=p,sheathing=s,zone=z</td>
+  </tr>
+  <tr>
+  <td>spore_print_color</td>
+  <td>black=k,brown=n,buff=b,chocolate=h,green=r, orange=o,purple=u,white=w,yellow=y</td>
+  </tr>
+  <tr>
+  <td>population</td>
+  <td>abundant=a,clustered=c,numerous=n, scattered=s,several=v,solitary=y</td>
+  </tr>
+  <tr>
+  <td>habitat</td>
+  <td>grasses=g,leaves=l,meadows=m, paths=p,urban=u,waste=w,woods=d</td>
+  </tr>
+  </tbody></table>
+  
+  <p>The <code>stalk_root</code> column contains many missing data, coded using <code>?</code>, and this will need to be considered when doing the analysis.</p>
+  
+  <h2><a id="user-content-analysis" class="anchor" href="#analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Analysis</h2>
+  
+  <p>I used the SAS <code>HPFOREST</code> procedure to build a random forest using all of the variables <em>except for</em> <code>stalk_root</code>.</p>
+  
+  <p>I used the default parameters for <code>Variables to Try</code>, <code>Maximum Trees</code> etc.</p>
+  
+  <h2><a id="user-content-results" class="anchor" href="#results" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Results</h2>
+  
+  <p>The fit statistics, for increasing forest size are shown below:</p>
+  
+  <p><a href="https://github.com/petersaunders/MLforDA/blob/master/RandomForests/images/fitstats1.png" target="_blank"><img src="https://github.com/petersaunders/MLforDA/raw/master/RandomForests/images/fitstats1.png" alt="Fitting Stats 1-10" style="max-width:100%;"></a>
+  <a href="https://github.com/petersaunders/MLforDA/blob/master/RandomForests/images/fitstats2.png" target="_blank"><img src="https://github.com/petersaunders/MLforDA/raw/master/RandomForests/images/fitstats2.png" alt="Fitting Stats 20-100" style="max-width:100%;"></a></p>
+  
+  <p>We can see that the estimates for the out-of-sample (or out-of-bag) error rate for small forests (1-5 trees) is already very small, only 0.15 - 0.2%  As the forest size is increased this decreases towards 0.1%.</p>
+  
+  <p>This suggests that the random forest method is actually unnecessary for this problem.  A single decision tree would do almost as well and would be much easier to interpret.  However, using the random forest method has produced a very accurate model.</p>
+  
+  <p>The variable importance table was:</p>
+  
+  <p><a href="https://github.com/petersaunders/MLforDA/blob/master/RandomForests/images/importance.png" target="_blank"><img src="https://github.com/petersaunders/MLforDA/raw/master/RandomForests/images/importance.png" alt="Variable Importance Table" style="max-width:100%;"></a></p>
+  
+  <p>The <code>odor</code> variable is by far the most important in predicting whether a mushroom is edible or poisonous.  Looking at a simple decision tree analysis shows that the poisonous mushrooms had the odors c,f,m,p,s and y whereas the odors a, l and n were associated with either edible or poisonous mushrooms.</p>
+  
+  <table><thead>
+  <tr>
+  <th>odor</th>
+  <th>edible</th>
+  </tr>
+  </thead><tbody>
+  <tr>
+  <td>c = creosote</td>
+  <td>No</td>
+  </tr>
+  <tr>
+  <td>f = foul</td>
+  <td>No</td>
+  </tr>
+  <tr>
+  <td>m = musty</td>
+  <td>No</td>
+  </tr>
+  <tr>
+  <td>p = pungent</td>
+  <td>No</td>
+  </tr>
+  <tr>
+  <td>s = spicy</td>
+  <td>No</td>
+  </tr>
+  <tr>
+  <td>y = fishy</td>
+  <td>No</td>
+  </tr>
+  <tr>
+  <td>a = almondy</td>
+  <td>Maybe</td>
+  </tr>
+  <tr>
+  <td>l = anise</td>
+  <td>Maybe</td>
+  </tr>
+  <tr>
+  <td>n = none</td>
+  <td>Maybe</td>
+  </tr>
+  </tbody></table>
+  
+  <p>So, if a mushroom smells foul, fishy or of creosote you shouldn't eat it, who would have guessed?!</p>
+  
+  <p>The next most important variable was <code>spore print color</code>, ahead of <code>ring type</code>. </p>
+  
+  <p>Simple, easily identifiable properties like <code>cap color</code> and <code>cap shape</code> are shown not to be very important, which demonstrates why it is difficult for people to determine whether mushrooms are edible or poisonous without careful inspection.</p>
+  </article>
 
       </section>
     </div>
