@@ -25,7 +25,9 @@ RUN;
 ## Background
 I acquired data on the edibility of mushrooms from the [University of California, Irvine Machine Learning Data repository](https://archive.ics.uci.edu/ml/datasets/Mushroom).
 
-The dataset consists of 8124 instances with 23 variables, including the class variable of edible/poisonous.  This represents 8124 hypothetical instances of 23 different species of mushroom (not classified here).  There is no simple rule for determining the edibility of a mushroom so I want to build a random forest model which, given all the information about a particular mushroom, will predict (hopefully with a high degree of accuracy!) whether it is edible or not.
+The dataset consists of 8124 instances with 23 variables, including the class variable of edible/poisonous.  This represents 8124 hypothetical instances of 23 different species of mushroom (not classified here).  
+
+There is no simple rule for determining the edibility of a mushroom so I want to build a random forest model which, given all the information about a particular mushroom, will predict (hopefully with a high degree of accuracy!) whether it is edible or not.
 
 The variables are:
 
@@ -66,6 +68,7 @@ I used the default parameters for `Variables to Try`, `Maximum Trees` etc.
 ## Results
 
 The fit statistics, for increasing forest size are shown below:
+
 ![Fitting Stats 1-10](images/fitstats1.png)
 ![Fitting Stats 20-100](images/fitstats2.png)
 
@@ -74,6 +77,7 @@ We can see that the estimates for the out-of-sample (or out-of-bag) error rate f
 This suggests that the random forest method is actually unnecessary for this problem.  A single decision tree would do almost as well and would be much easier to interpret.  However, using the random forest method has produced a very accurate model.
 
 The variable importance table was:
+
 ![Variable Importance Table](images/importance.png)
 
 The `odor` variable is by far the most important in predicting whether a mushroom is edible or poisonous.  Looking at a simple decision tree analysis shows that the poisonous mushrooms had the odors c,f,m,p,s and y whereas the odors a, l and n were associated with either edible or poisonous mushrooms.
@@ -90,9 +94,8 @@ The `odor` variable is by far the most important in predicting whether a mushroo
 |l = anise    | Maybe |
 |n = none     | Maybe |
 
-So, if a mushroom smells foul, fishy or of creosote you shouldn't eat it, who knew!
+So, if a mushroom smells foul, fishy or of creosote you shouldn't eat it, who would have guessed?!
 
-The next most important variable was `spore print color`, ahead of `ring type`.
+The next most important variable was `spore print color`, ahead of `ring type`. 
 
-
-
+Simple, easily identifiable properties like `cap color` and `cap shape` are shown not to be very important, which demonstrates why it is difficult for people to determine whether mushrooms are edible or poisonous without careful inspection.
