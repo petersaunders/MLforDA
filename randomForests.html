@@ -28,9 +28,9 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-  <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-week-2---random-forests" class="anchor" href="#week-2---random-forests" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Week 2 - Random Forests</h1>
+  <article class="markdown-body entry-content" itemprop="text"><h1>Week 2 - Random Forests</h1>
   
-  <h2><a id="user-content-sas-code" class="anchor" href="#sas-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>SAS Code</h2>
+  <h2>SAS Code</h2>
   
   <div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
   
@@ -51,7 +51,7 @@
   
   <span class="pl-k">RUN</span>;</pre></div>
   
-  <h2><a id="user-content-background" class="anchor" href="#background" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Background</h2>
+  <h2>Background</h2>
   
   <p>I acquired data on the edibility of mushrooms from the <a href="https://archive.ics.uci.edu/ml/datasets/Mushroom">University of California, Irvine Machine Learning Data repository</a>.</p>
   
@@ -163,13 +163,13 @@
   
   <p>The <code>stalk_root</code> column contains many missing data, coded using <code>?</code>, and this will need to be considered when doing the analysis.</p>
   
-  <h2><a id="user-content-analysis" class="anchor" href="#analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Analysis</h2>
+  <h2>Analysis</h2>
   
   <p>I used the SAS <code>HPFOREST</code> procedure to build a random forest using all of the variables <em>except for</em> <code>stalk_root</code>.</p>
   
-  <p>I used the default parameters for <code>Variables to Try</code>, <code>Maximum Trees</code> etc.</p>
+  <p>I used the default parameters for <code>Variables to Try</code>, <code>Maximum Trees</code> etc. and tried various random number seeds.  The error rates for small forests depended on the seed but always tended towards the same limit at the forest size increased.</p>
   
-  <h2><a id="user-content-results" class="anchor" href="#results" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Results</h2>
+  <h2>Results</h2>
   
   <p>The fit statistics, for increasing forest size are shown below:</p>
   
