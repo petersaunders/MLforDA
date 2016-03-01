@@ -76,5 +76,23 @@ This suggests that the random forest method is actually unnecessary for this pro
 The variable importance table was:
 ![Variable Importance Table](images/importance.png)
 
-The `odor` variable is by far the most important in predicting whether a mushroom is edible or poisonous.  Looking at a simple decision tree...
+The `odor` variable is by far the most important in predicting whether a mushroom is edible or poisonous.  Looking at a simple decision tree analysis shows that the poisonous mushrooms had the odors c,f,m,p,s and y whereas the odors a, l and n were associated with either edible or poisonous mushrooms.
+
+| odor | edible |
+|------|--------|
+|c = creosote | No |
+|f = foul     | No |
+|m = musty    | No |
+|p = pungent  | No |
+|s = spicy    | No |
+|y = fishy    | No |
+|a = almondy  | Maybe |
+|l = anise    | Maybe |
+|n = none     | Maybe |
+
+So, if a mushroom smells foul, fishy or of creosote you shouldn't eat it, who knew!
+
+The next most important variable was `spore print color`, ahead of `ring type`.
+
+
 
