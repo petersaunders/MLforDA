@@ -19,8 +19,12 @@ Some of the predictor variables in the dataset are simply related to others, suc
 
 Having so many explanatory variables should be a good test of the lasso regression method and how effective it is at identifying which variables are important out of the many available.
 
+The data-set contains many missing values, which need to be accounted for when building the model.
+
 ## Analysis
 
-The data-set already contains a pre-defined `fold` variable which is set up
+The data-set already contains a pre-defined `fold` variable which is set up for *non-random* 10 fold cross-valdation.  This variable is only intended to be used for debugging and I will not be using it for building my model.  Instead I set up random 10 fold cross validation...
+
+
 
 ## Results
