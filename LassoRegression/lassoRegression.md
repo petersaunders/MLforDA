@@ -58,11 +58,19 @@ Having so many explanatory variables should be a good test of the lasso regressi
 
 The data-set already contains a pre-defined `fold` variable which is set up for *non-random* 10 fold cross-valdation.  This variable is only intended to be used for debugging and I will not be using it for building my model.  Instead I used randomly generated folds.
 
-I tried running the model with and without the policing data.  Including the policing data meant that I was only left with 319 instances to use.  I therefore decided it would be better to remove all of the columns with missing data.
+I tried running the model with and without the policing data.  Including the policing data meant that I was only left with 319 instances to use.  I therefore decided it would be better to remove all of the columns with missing data.  This then left me with exactly 100 predictor variables.
 
-I used a 60% training / 40% testing split with 10 fold cross-validation.
+I used a 60% training / 40% testing split with 10 fold cross-validation.  With the full data-set this meant that 1197 instances were used for training and 796 for testing.
+
+![GLM Select Details](/images/glmselect.png)
 
 ## Results
 
-The final, optimum regression model had 
+The final, selected, optimum regression model included 24 variables.
+
+
+
+The top 4 are substantially more important than the rest.
+
+
 
