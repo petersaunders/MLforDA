@@ -62,15 +62,27 @@ I tried running the model with and without the policing data.  Including the pol
 
 I used a 60% training / 40% testing split with 10 fold cross-validation.  With the full data-set this meant that 1197 instances were used for training and 796 for testing.
 
-![GLM Select Details](/images/glmselect.png)
+![GLM Select Details](/images/glmSelect.png)
 
 ## Results
 
-The final, selected, optimum regression model included 24 variables.
+The final, selected, optimum regression model included 24 out of 100 possible variables.  The variable selection table is shown below, with the optimum model highlighted.
 
+![Top Variables](/images/variableSelect.png)
 
+The model selection curves were:
 
-The top 4 are substantially more important than the rest.
+![Model Selection Curves](/images/modelCurves.png)
 
+The top 4 variables are substantially more important than the rest.  This is somewhat reflected in the regression coefficients which, since the data is normalised, are an approximate measure of the relative importance of the covariates.  It is also important to note the signs of the coefficients.
 
+| Covariate    | Coeff.  | Description                                          |
+|==============|=========|======================================================|
+| PctIlleg     | +0.186  | percentage of kids born to never married             |
+| PctKids2Par  | -0.289  | percentage of kids in family housing with two parents|
+| racePctWhite | -0.053  | percentage of population that is caucasian           |
+| NumIlleg     | +0.041  | number of kids born to never married                 |
+| HousVacant   | +0.169  | number of vacant households                          |
+
+We can see from the top coefficients that family, race and housing conditions are all important factors in modelling the rate of violent crime.  These might be proxies for some other (unreported or unobtainable) statistic such as the poverty rate or the prevalence of gang culture.
 
