@@ -28,7 +28,118 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-      <em>This assignment has not been completed yet</em>
+      <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-week-3---lasso-regression" class="anchor" href="#week-3---lasso-regression" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Week 3 - Lasso Regression</h1>
+
+<h2><a id="user-content-sas-code" class="anchor" href="#sas-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>SAS Code</h2>
+
+<div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
+
+<span class="pl-c">/* Import the crime data from csv file */</span>
+<span class="pl-c1">PROC <span class="pl-c1">IMPORT</span></span> DATAFILE=<span class="pl-s">'/home/petersaunders10/lassoRegression/crime.csv'</span> 
+        <span class="pl-c1"><span class="pl-c1">OUT</span></span>=imported_data <span class="pl-c1"><span class="pl-c1">REPLACE</span></span>;
+
+
+<span class="pl-c">/* Split data into training and testing sets */</span>
+<span class="pl-c1">PROC <span class="pl-c1">SURVEYSELECT</span></span> data=imported_data <span class="pl-c1"><span class="pl-c1">out</span></span>=traintest seed=<span class="pl-c1">1234</span> samprate=<span class="pl-c1">0.6</span> method=srs outall;
+<span class="pl-k">RUN</span>;   
+
+<span class="pl-c1"><span class="pl-c1">ods</span></span> graphics <span class="pl-c1"><span class="pl-c1">on</span></span>;
+
+<span class="pl-c">/* Lasso Regression with selected Explanatory Variables */</span>
+<span class="pl-c1">PROC <span class="pl-c1">GLMSELECT</span></span> data=traintest plots=all seed=<span class="pl-c1">5678</span>;
+     partition ROLE=selected(train=<span class="pl-s">'1'</span> <span class="pl-c1"><span class="pl-c1">test</span></span><span class="pl-k">=</span><span class="pl-s">'0'</span>);
+     <span class="pl-c1"><span class="pl-c1">MODEL</span></span> ViolentCrimesPerPop=population householdsize racepctblack racePctWhite 
+     racePctAsian racePctHisp agePct12t21 agePct12t29 agePct16t24 agePct65up
+     numbUrban pctUrban medIncome pctWWage pctWFarmSelf pctWInvInc pctWSocSec
+     pctWPubAsst pctWRetire medFamInc perCapInc whitePerCap blackPerCap
+     indianPerCap AsianPerCap OtherPerCap HispPerCap NumUnderPov PctPopUnderPov
+     PctLess9thGrade PctNotHSGrad PctBSorMore PctUnemployed PctEmploy
+     PctEmplManu PctEmplProfServ PctOccupManu PctOccupMgmtProf MalePctDivorce
+     MalePctNevMarr FemalePctDiv TotalPctDiv PersPerFam PctFam2Par PctKids2Par
+     PctYoungKids2Par PctTeen2Par PctWorkMomYoungKids PctWorkMom NumIlleg
+     PctIlleg NumImmig PctImmigRecent PctImmigRec5 PctImmigRec8 PctImmigRec10
+     PctRecentImmig PctRecImmig5 PctRecImmig8 PctRecImmig10 PctSpeakEnglOnly
+     PctNotSpeakEnglWell PctLargHouseFam PctLargHouseOccup PersPerOccupHous
+     PersPerOwnOccHous PersPerRentOccHous PctPersOwnOccup PctPersDenseHous
+     PctHousLess3BR MedNumBR HousVacant PctHousOccup PctHousOwnOcc 
+     PctVacantBoarded PctVacMore6Mos MedYrHousBuilt PctHousNoPhone
+     PctWOFullPlumb OwnOccLowQuart OwnOccMedVal OwnOccHiQuart RentLowQ RentMedian
+     RentHighQ MedRent MedRentPctHousInc MedOwnCostPctInc MedOwnCostPctIncNoMtg
+     NumInShelters NumStreet PctForeignBorn PctBornSameState PctSameHouse85
+     PctSameCity85 PctSameState85 LandArea PopDens PctUsePubTrans 
+     LemasPctOfficDrugUn<span class="pl-k">/</span><span class="pl-c1"><span class="pl-c1">selection</span></span>=lar(choose=<span class="pl-c1"><span class="pl-c1">cv</span></span> <span class="pl-c1"><span class="pl-c1">stop</span></span>=none) cvmethod=random(<span class="pl-c1">10</span>);
+<span class="pl-k">RUN</span>;</pre></div>
+
+<h2><a id="user-content-background" class="anchor" href="#background" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Background</h2>
+
+<p>I acquired data on violent crime in US cities from the <a href="https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime">University of California, Irvine Machine Learning Data repository</a>.  This dataset contains very large pool of 122 predictor variable (as opposed to some purely instance identifying varibles, such as <code>state</code>, <code>county</code> and <code>communityname</code>) in addition to the response variable <code>ViolentCrimesPerPop</code>.</p>
+
+<p>The predictors are a collection of statistics for the community including race/ethnicity, employment rate, housing quality and family composition.  Some instances also have statistics relating to the local policing, however these are only available for around 15% of the communities covered.</p>
+
+<p>It would be excessive to list all of the variables here, so, if you are interested in the full list, see the link above.  I will mention only the variables which appear in the final lasso regression model.</p>
+
+<p>Some of the predictor variables in the dataset are simply related to others, such as the variable <code>PopDens</code>, the population density, which is just the variable <code>population</code> divided by the variable <code>LandArea</code>.  We should expect the lasso regression to select from these highly correlated variables.</p>
+
+<p>Having so many explanatory variables should be a good test of the lasso regression method and how effective it is at identifying which variables are important out of the many available.</p>
+
+<h2><a id="user-content-analysis" class="anchor" href="#analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Analysis</h2>
+
+<p>The data-set already contains a pre-defined <code>fold</code> variable which is set up for <em>non-random</em> 10 fold cross-valdation.  This variable is only intended to be used for debugging and I will not be using it for building my model.  Instead I used randomly generated folds.</p>
+
+<p>I tried running the model with and without the policing data.  Including the policing data meant that I was only left with 319 instances to use.  I therefore decided it would be better to remove all of the columns with missing data.  This then left me with exactly 100 predictor variables.</p>
+
+<p>I used a 60% training / 40% testing split with 10 fold cross-validation.  With the full data-set this meant that 1197 instances were used for training and 796 for testing.</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/LassoRegression/images/glmSelect.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/glmSelect.png" alt="GLM Select Details" style="max-width:100%;"></a></p>
+
+<h2><a id="user-content-results" class="anchor" href="#results" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Results</h2>
+
+<p>The final, selected, optimum regression model included 24 out of 100 possible variables.  The variable selection table is shown below, with the optimum model highlighted.</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/LassoRegression/images/variableSelect.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/variableSelect.png" alt="Top Variables" style="max-width:100%;"></a></p>
+
+<p>The model selection curves were:</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/LassoRegression/images/modelCurves.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/modelCurves.png" alt="Model Selection Curves" style="max-width:100%;"></a></p>
+
+<p>The top 4 variables are substantially more important than the rest.  This is somewhat reflected in the regression coefficients which, since the data is normalised, are an approximate measure of the relative importance of the covariates.  It is also important to note the signs of the coefficients.</p>
+
+<table><thead>
+<tr>
+<th>Covariate</th>
+<th>Coeff.</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>PctIlleg</code></td>
+<td>+0.186</td>
+<td>percentage of kids born to never married</td>
+</tr>
+<tr>
+<td><code>PctKids2Par</code></td>
+<td>-0.289</td>
+<td>percentage of kids in family housing with two parents</td>
+</tr>
+<tr>
+<td><code>racePctWhite</code></td>
+<td>-0.053</td>
+<td>percentage of population that is caucasian</td>
+</tr>
+<tr>
+<td><code>NumIlleg</code></td>
+<td>+0.041</td>
+<td>number of kids born to never married</td>
+</tr>
+<tr>
+<td><code>HousVacant</code></td>
+<td>+0.169</td>
+<td>number of vacant households</td>
+</tr>
+</tbody></table>
+
+<p>We can see from the top coefficients that family, race and housing conditions are all important factors in modelling the rate of violent crime.  These might be proxies for some other (unreported or unobtainable) statistic such as the poverty rate or the prevalence of gang culture.</p>
+</article>
 
       </section>
     </div>
