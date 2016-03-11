@@ -28,9 +28,9 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-      <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-week-3---lasso-regression" class="anchor" href="#week-3---lasso-regression" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Week 3 - Lasso Regression</h1>
+      <article class="markdown-body entry-content" itemprop="text"><h1>Week 3 - Lasso Regression</h1>
 
-<h2><a id="user-content-sas-code" class="anchor" href="#sas-code" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>SAS Code</h2>
+<h2>SAS Code</h2>
 
 <div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
 
@@ -70,7 +70,7 @@
      LemasPctOfficDrugUn<span class="pl-k">/</span><span class="pl-c1"><span class="pl-c1">selection</span></span>=lar(choose=<span class="pl-c1"><span class="pl-c1">cv</span></span> <span class="pl-c1"><span class="pl-c1">stop</span></span>=none) cvmethod=random(<span class="pl-c1">10</span>);
 <span class="pl-k">RUN</span>;</pre></div>
 
-<h2><a id="user-content-background" class="anchor" href="#background" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Background</h2>
+<h2>Background</h2>
 
 <p>I acquired data on violent crime in US cities from the <a href="https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime">University of California, Irvine Machine Learning Data repository</a>.  This dataset contains very large pool of 122 predictor variable (as opposed to some purely instance identifying varibles, such as <code>state</code>, <code>county</code> and <code>communityname</code>) in addition to the response variable <code>ViolentCrimesPerPop</code>.</p>
 
@@ -82,7 +82,7 @@
 
 <p>Having so many explanatory variables should be a good test of the lasso regression method and how effective it is at identifying which variables are important out of the many available.</p>
 
-<h2><a id="user-content-analysis" class="anchor" href="#analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Analysis</h2>
+<h2>Analysis</h2>
 
 <p>The data-set already contains a pre-defined <code>fold</code> variable which is set up for <em>non-random</em> 10 fold cross-valdation.  This variable is only intended to be used for debugging and I will not be using it for building my model.  Instead I used randomly generated folds.</p>
 
@@ -90,17 +90,17 @@
 
 <p>I used a 60% training / 40% testing split with 10 fold cross-validation.  With the full data-set this meant that 1197 instances were used for training and 796 for testing.</p>
 
-<p><a href="/petersaunders/MLforDA/blob/master/LassoRegression/images/glmSelect.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/glmSelect.png" alt="GLM Select Details" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/petersaunders/MLforDA/blob/master/LassoRegression/images/glmSelect.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/glmSelect.png" alt="GLM Select Details" style="max-width:100%;"></a></p>
 
-<h2><a id="user-content-results" class="anchor" href="#results" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Results</h2>
+<h2>Results</h2>
 
 <p>The final, selected, optimum regression model included 24 out of 100 possible variables.  The variable selection table is shown below, with the optimum model highlighted.</p>
 
-<p><a href="/petersaunders/MLforDA/blob/master/LassoRegression/images/variableSelect.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/variableSelect.png" alt="Top Variables" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/petersaunders/MLforDA/blob/master/LassoRegression/images/variableSelect.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/variableSelect.png" alt="Top Variables" style="max-width:100%;"></a></p>
 
 <p>The model selection curves were:</p>
 
-<p><a href="/petersaunders/MLforDA/blob/master/LassoRegression/images/modelCurves.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/modelCurves.png" alt="Model Selection Curves" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/petersaunders/MLforDA/blob/master/LassoRegression/images/modelCurves.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/LassoRegression/images/modelCurves.png" alt="Model Selection Curves" style="max-width:100%;"></a></p>
 
 <p>The top 4 variables are substantially more important than the rest.  This is somewhat reflected in the regression coefficients which, since the data is normalised, are an approximate measure of the relative importance of the covariates.  It is also important to note the signs of the coefficients.</p>
 
