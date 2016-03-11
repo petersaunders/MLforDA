@@ -1,7 +1,5 @@
 # Week 3 - Lasso Regression
 
-## Final Result
-
 ## SAS Code
 ```sas
 LIBNAME mydata "/courses/d1406ae5ba27fe300 " access=readonly;
