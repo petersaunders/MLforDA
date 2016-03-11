@@ -76,11 +76,11 @@ The top 4 variables are substantially more important than the rest.  This is som
 
 | Covariate    | Coeff.  | Description                                          |
 |--------------|---------|------------------------------------------------------|
-| PctIlleg     | +0.186  | percentage of kids born to never married             |
-| PctKids2Par  | -0.289  | percentage of kids in family housing with two parents|
-| racePctWhite | -0.053  | percentage of population that is caucasian           |
-| NumIlleg     | +0.041  | number of kids born to never married                 |
-| HousVacant   | +0.169  | number of vacant households                          |
+| `PctIlleg`    | +0.186  | percentage of kids born to never married             |
+| `PctKids2Par` | -0.289  | percentage of kids in family housing with two parents|
+| `racePctWhite`| -0.053  | percentage of population that is caucasian           |
+| `NumIlleg`    | +0.041  | number of kids born to never married                 |
+| `HousVacant`  | +0.169  | number of vacant households                          |
 
 We can see from the top coefficients that family, race and housing conditions are all important factors in modelling the rate of violent crime.  These might be proxies for some other (unreported or unobtainable) statistic such as the poverty rate or the prevalence of gang culture.
 
