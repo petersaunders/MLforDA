@@ -121,7 +121,7 @@ The results of the k-means algorithm gave me the elbow plot:
 
 This suggests that k=2 is probably the most likely number of clusters, although it is not particularly clear.
 
-![Table of cluster means and standard deviation](images/clusterbs.png)
+![Table of cluster means and standard deviation](images/clustertbs.png)
 
 The values in the table show that the clusters are only marginally distinct - the separation of the means is in general only marginally bigger than the combined standard deviations in each dimension.
 
