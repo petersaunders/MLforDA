@@ -18,7 +18,6 @@ PROC STANDARD data=imported_data out=cluster_data mean=0 std=1;
     var mcv alkphos sgpt sgot gammagt; 
 RUN;
 
-
 /* Split data randomly into test and training data */
 PROC SURVEYSELECT data=cluster_data out=traintest seed=1234 samprate=0.7 method=srs outall;
 RUN; 
@@ -56,11 +55,11 @@ RUN;
 %MEND;
 
 %MACRO names(prefix, maxnum);
-  %do i=1 %to &maxnum;
+  %DO i=1 %TO &maxnum;
     &prefix&i
-  %end;
+  %END;
   ;
-%MEND names;
+%MEND;
 
 %MACRO getAllRSquared(K);
     %DO i = 1 %TO &K.;
