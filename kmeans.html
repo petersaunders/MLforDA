@@ -28,7 +28,165 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-      <em>This assignment has not been completed yet</em>
+      <article class="markdown-body entry-content" itemprop="text"><h1>Week 4 - K-Means Clustering</h1>
+
+<h2>SAS Code</h2>
+
+<div class="highlight highlight-source-sas"><pre><span class="pl-c1"><span class="pl-c1">LIBNAME</span></span> mydata <span class="pl-s">"/courses/d1406ae5ba27fe300 "</span> access<span class="pl-k">=</span>readonly;
+
+<span class="pl-c1"><span class="pl-c1">ods</span></span> graphics <span class="pl-c1"><span class="pl-c1">on</span></span>;
+
+<span class="pl-c">/* Set max K */</span>
+%LET maxK=<span class="pl-c1">6</span>;
+
+<span class="pl-c">/* Import the liver data from csv file */</span>
+<span class="pl-c1">PROC <span class="pl-c1">IMPORT</span></span> DATAFILE=<span class="pl-s">'/home/petersaunders10/kMeans/liver.csv'</span> 
+        <span class="pl-c1"><span class="pl-c1">OUT</span></span>=imported_data <span class="pl-c1"><span class="pl-c1">REPLACE</span></span>;
+
+<span class="pl-c">/* Standardize the blood test variables */</span>
+<span class="pl-c1">PROC <span class="pl-c1">STANDARD</span></span> data=imported_data <span class="pl-c1"><span class="pl-c1">out</span></span>=cluster_data <span class="pl-c1"><span class="pl-c1">mean</span></span>=<span class="pl-c1">0</span> <span class="pl-c1"><span class="pl-c1">std</span></span>=<span class="pl-c1">1</span>; 
+    <span class="pl-c1"><span class="pl-c1">var</span></span> mcv alkphos sgpt sgot gammagt; 
+<span class="pl-k">RUN</span>;
+
+<span class="pl-c">/* Split data randomly into test and training data */</span>
+<span class="pl-c1">PROC <span class="pl-c1">SURVEYSELECT</span></span> data=cluster_data <span class="pl-c1"><span class="pl-c1">out</span></span>=traintest seed=<span class="pl-c1">1234</span> samprate=<span class="pl-c1">0.7</span> method=srs outall;
+<span class="pl-k">RUN</span>; 
+
+<span class="pl-k">DATA</span> <span class="pl-en">train_data</span>;
+    <span class="pl-c1">SET</span> <span class="pl-en">traintest</span>;
+    <span class="pl-k">IF</span> selected=<span class="pl-c1">1</span>;
+<span class="pl-k">RUN</span>;
+
+<span class="pl-k">DATA</span> <span class="pl-en">test_data</span>;
+    <span class="pl-c1">SET</span> <span class="pl-en">traintest</span>;
+    <span class="pl-k">IF</span> selected=<span class="pl-c1">0</span>;
+<span class="pl-k">RUN</span>;
+
+<span class="pl-c">/* Run K-means from 1 to K on train_data */</span>
+<span class="pl-k"><span class="pl-c1">%MACRO</span> <span class="pl-en">kmeans</span></span>(K);
+    <span class="pl-k"><span class="pl-c1">%DO</span> <span class="pl-en">i</span></span>=<span class="pl-c1">1</span> %<span class="pl-c1"><span class="pl-c1">TO</span></span> <span class="pl-smi">&amp;K</span>.;
+        <span class="pl-c1">PROC <span class="pl-c1">FASTCLUS</span></span> data=train_data <span class="pl-c1"><span class="pl-c1">out</span></span>=kmeanResults<span class="pl-smi">&amp;i</span>. outstat=kmeanStats<span class="pl-smi">&amp;i</span>. 
+        maxclusters=<span class="pl-smi">&amp;i</span>. maxiter=<span class="pl-c1">100</span>;
+            <span class="pl-c1"><span class="pl-c1">var</span></span> mcv alkphos sgpt sgot gammagt;
+        <span class="pl-k">RUN</span>;
+    <span class="pl-k"><span class="pl-c1">%END</span></span>;
+<span class="pl-k"><span class="pl-c1">%MEND</span></span>;
+
+%kmeans(<span class="pl-smi">&amp;maxK</span>);
+
+<span class="pl-c">/* Extract R-squared value for each model */</span>
+<span class="pl-k"><span class="pl-c1">%MACRO</span> <span class="pl-en">getRSquared</span></span>(kth, kthStats);
+    <span class="pl-k">DATA</span> <span class="pl-en">rSquared</span>&amp;<span class="pl-en">kth</span>.;
+    <span class="pl-c1">SET</span> &amp;<span class="pl-en">kthStats</span>.;
+    KTH = <span class="pl-smi">&amp;kth</span>.;
+
+    <span class="pl-k">IF</span> <span class="pl-c1"><span class="pl-c1">_TYPE_</span></span>=<span class="pl-s">'RSQ'</span>;    
+    <span class="pl-c1"><span class="pl-c1">KEEP</span></span> KTH OVER_ALL;
+    <span class="pl-k">RUN</span>;
+<span class="pl-k"><span class="pl-c1">%MEND</span></span>;
+
+<span class="pl-k"><span class="pl-c1">%MACRO</span> <span class="pl-en">names</span></span>(prefix, maxnum);
+  <span class="pl-k"><span class="pl-c1">%DO</span> <span class="pl-en">i</span></span>=<span class="pl-c1">1</span> %<span class="pl-c1"><span class="pl-c1">TO</span></span> <span class="pl-smi">&amp;maxnum</span>;
+    <span class="pl-smi">&amp;prefix&amp;i</span>
+  <span class="pl-k"><span class="pl-c1">%END</span></span>;
+  ;
+<span class="pl-k"><span class="pl-c1">%MEND</span></span>;
+
+<span class="pl-k"><span class="pl-c1">%MACRO</span> <span class="pl-en">getAllRSquared</span></span>(K);
+    <span class="pl-k"><span class="pl-c1">%DO</span> <span class="pl-en">i</span></span> = <span class="pl-c1">1</span> %<span class="pl-c1"><span class="pl-c1">TO</span></span> <span class="pl-smi">&amp;K</span>.;
+       %getRSquared(<span class="pl-smi">&amp;i</span>., kmeanStats<span class="pl-smi">&amp;i</span>.);
+    <span class="pl-k"><span class="pl-c1">%END</span></span>;
+<span class="pl-k"><span class="pl-c1">%MEND</span></span>;
+
+%getAllRSquared(<span class="pl-smi">&amp;maxK</span>);
+
+<span class="pl-k">DATA</span> <span class="pl-en">combineRSquared</span>;
+  <span class="pl-c1">SET</span> %<span class="pl-en">names</span>(rSquared,<span class="pl-smi">&amp;maxK</span>);
+<span class="pl-k">RUN</span>;
+
+<span class="pl-c">/* Elbow plot of R-squared Values */</span>
+SYMBOL1 color=blue interpol=<span class="pl-c1"><span class="pl-c1">join</span></span>;
+<span class="pl-c1">PROC <span class="pl-c1">GPLOT</span></span> data=combineRSquared;
+    plot OVER_ALL<span class="pl-k">*</span>KTH;
+<span class="pl-k">RUN</span>;
+
+<span class="pl-c">/* Plot 2 cluster model using Canonical Discriminants */</span>
+<span class="pl-c1">PROC <span class="pl-c1">CANDISC</span></span> data=kmeanResults2 ncan=<span class="pl-c1">2</span> <span class="pl-c1"><span class="pl-c1">out</span></span>=clustcd;
+    <span class="pl-c1"><span class="pl-c1">class</span></span> cluster;
+    <span class="pl-c1"><span class="pl-c1">var</span></span> mcv alkphos sgpt sgot gammagt;
+<span class="pl-k">RUN</span>;
+
+<span class="pl-c1">PROC <span class="pl-c1">SGPLOT</span></span> data=clustcd;
+    scatter y=can2 <span class="pl-c1"><span class="pl-c1">x</span></span>=can1<span class="pl-k">/</span> <span class="pl-c1"><span class="pl-c1">group</span></span>=cluster;
+<span class="pl-k">RUN</span>;</pre></div>
+
+<h2>Background</h2>
+
+<p>I acquired data on blood tests designed to diagnose liver disorders from the <a href="http://archive.ics.uci.edu/ml/datasets/Liver+Disorders">University of California, Irvine Machine Learning Data repository</a>.</p>
+
+<p>The dataset consists of 345 instances with 7 variates, of which 5 are blood test results, which will form the basis of my investigation.  I have no prior knowledge of the groups included in this dataset.</p>
+
+<table><thead>
+<tr>
+<th>Variate</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mcv</td>
+<td>mean corpuscular volume</td>
+</tr>
+<tr>
+<td>alkphos</td>
+<td>alkaline phosphotase</td>
+</tr>
+<tr>
+<td>sgpt</td>
+<td>alamine aminotransferase</td>
+</tr>
+<tr>
+<td>sgot</td>
+<td>aspartate aminotransferase</td>
+</tr>
+<tr>
+<td>gammagt</td>
+<td>gamma-glutamyl transpeptidase</td>
+</tr>
+<tr>
+<td>drinks</td>
+<td>number of half-pint equivalents of alcoholic beverages drunk per day</td>
+</tr>
+<tr>
+<td>selector</td>
+<td>field used to split data into two sets</td>
+</tr>
+</tbody></table>
+
+<h2>Analysis</h2>
+
+<ul>
+<li>I started by normalizing all of the 5 numeric variables.</li>
+<li>I split the data-set into 70% training / 30% testing.</li>
+<li>I ran the k-means algorithm for k=1 to k=6 clusters.</li>
+<li>With k=2 I plotted the data against the first 2 canonical discriminants</li>
+</ul>
+
+<h2>Results</h2>
+
+<p>The results of the k-means algorithm gave me the elbow plot:</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/KMeansClustering/images/elbow.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/KMeansClustering/images/elbow.png" alt="Elbow Plot of K-Means" style="max-width:100%;"></a></p>
+
+<p>This suggests that k=2 is probably the most likely number of clusters, although it is not particularly clear.</p>
+
+<p>This gave me the canonical discriminant plot:</p>
+
+<p><a href="/petersaunders/MLforDA/blob/master/KMeansClustering/images/cand.png" target="_blank"><img src="/petersaunders/MLforDA/raw/master/KMeansClustering/images/cand.png" alt="Canonical Discriminant Plot" style="max-width:100%;"></a></p>
+
+<p>This plot shows that this data doesn't really contain an obvious second cluster.  It was not unreasonable to assume that there might be clusters (e.g. those with a liver disorders and those without) but there is no clear evidence in the data to support this.</p>
+
+<p>This investigation didn't find clear evidence of clusters in blood test results for liver disorers and showed that a regression or decision tree approach would probably be more effective.</p>
+</article>
 
       </section>
     </div>
