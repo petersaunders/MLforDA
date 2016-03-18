@@ -119,7 +119,7 @@ The results of the k-means algorithm gave me the elbow plot:
 
 ![Elbow Plot of K-Means](images/elbow.png)
 
-This suggests that k=2 is probably the most likely number of clusters.  
+This suggests that k=2 is probably the most likely number of clusters, although it is not particularly clear.
 
 This gave me the canonical discriminant plot:
 
@@ -127,4 +127,4 @@ This gave me the canonical discriminant plot:
 
 This plot shows that this data doesn't really contain an obvious second cluster.  It was not unreasonable to assume that there might be clusters (e.g. those with a liver disorders and those without) but there is no clear evidence in the data to support this.
 
-
+This investigation didn't find clear evidence of clusters in blood test results for liver disorers and showed that a regression or decision tree approach would probably be more effective.
