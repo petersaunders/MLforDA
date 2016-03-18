@@ -121,7 +121,11 @@ The results of the k-means algorithm gave me the elbow plot:
 
 This suggests that k=2 is probably the most likely number of clusters, although it is not particularly clear.
 
-This gave me the canonical discriminant plot:
+![Table of cluster means and standard deviation](images/clusterbs.png)
+
+The values in the table show that the clusters are only marginally distinct - the separation of the means is in general only marginally bigger than the combined standard deviations in each dimension.
+
+The canonical discriminant plot shows the two clusters:
 
 ![Canonical Discriminant Plot](images/cand.png)
 
