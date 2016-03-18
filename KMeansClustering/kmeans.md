@@ -123,7 +123,7 @@ This suggests that k=2 is probably the most likely number of clusters, although 
 
 ![Table of cluster means and standard deviation](images/clustertbs.png)
 
-The values in the table show that the clusters are only marginally distinct - the separation of the means is in general only marginally bigger than the combined standard deviations in each dimension.
+The values in the table show that the clusters are only marginally distinct - the separation of the means is in general only marginally, if at all, larger than the combined standard deviations in each dimension.
 
 The canonical discriminant plot shows the two clusters:
 
