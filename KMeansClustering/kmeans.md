@@ -35,7 +35,8 @@ RUN;
 /* Run K-means from 1 to K on train_data */
 %MACRO kmeans(K);
     %DO i=1 %TO &K.;
-        PROC FASTCLUS data=train_data out=kmeanResults&i. outstat=kmeanStats&i. maxclusters=&i. maxiter=100;
+        PROC FASTCLUS data=train_data out=kmeanResults&i. outstat=kmeanStats&i. 
+        maxclusters=&i. maxiter=100;
             var mcv alkphos sgpt sgot gammagt;
         RUN;
     %END;
